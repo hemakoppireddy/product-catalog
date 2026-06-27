@@ -10,7 +10,7 @@ import ProductCard from "../../components/ProductCard";
 import FilterPanel from "../../components/FilterPanel";
 import Pagination from "../../components/Pagination";
 
-import useProductFilters from "../../hooks/useProductFilters";
+// import useProductFilters from "../../hooks/useProductFilters";
 
 import { getProducts } from "../../lib/api";
 
@@ -28,49 +28,49 @@ export default function ProductsPage() {
 
     const [page, setPage] = useState(1);
 
-    const { updateFilter } = useProductFilters();
+    // const { updateFilter } = useProductFilters();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("q", search);
+    //     updateFilter("q", search);
 
-    }, [search]);
+    // }, [search]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("category", category);
+    //     updateFilter("category", category);
 
-        setPage(1);
+    //     setPage(1);
 
-    }, [category]);
+    // }, [category]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("minPrice", minPrice);
+    //     updateFilter("minPrice", minPrice);
 
-        setPage(1);
+    //     setPage(1);
 
-    }, [minPrice]);
+    // }, [minPrice]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("maxPrice", maxPrice);
+    //     updateFilter("maxPrice", maxPrice);
 
-        setPage(1);
+    //     setPage(1);
 
-    }, [maxPrice]);
+    // }, [maxPrice]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("sortBy", sortBy);
+    //     updateFilter("sortBy", sortBy);
 
-    }, [sortBy]);
+    // }, [sortBy]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        updateFilter("page", page.toString());
+    //     updateFilter("page", page.toString());
 
-    }, [page]);
+    // }, [page]);
 
     let sortField = "";
     let sortOrder = "";

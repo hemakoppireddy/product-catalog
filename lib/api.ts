@@ -16,6 +16,8 @@ interface QueryParams {
 
   page?: number;
 
+  limit?: number;
+
 }
 
 export async function getProducts(params: QueryParams = {}) {
