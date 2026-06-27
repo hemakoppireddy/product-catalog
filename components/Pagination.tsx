@@ -1,11 +1,39 @@
-export default function Pagination() {
+"use client";
+
+import "./Pagination.css";
+
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  setPage: (page: number) => void;
+}
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  setPage,
+}: PaginationProps) {
   return (
-    <div>
-      <button>Previous</button>
+    <div className="pagination">
 
-      <span>1</span>
+      <button
+        disabled={currentPage === 1}
+        onClick={() => setPage(currentPage - 1)}
+      >
+        Previous
+      </button>
 
-      <button>Next</button>
+      <span>
+        Page {currentPage} of {totalPages}
+      </span>
+
+      <button
+        disabled={currentPage === totalPages}
+        onClick={() => setPage(currentPage + 1)}
+      >
+        Next
+      </button>
+
     </div>
   );
 }

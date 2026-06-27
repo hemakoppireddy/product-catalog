@@ -3,19 +3,19 @@
 import "./products.css";
 
 import { useState } from "react";
-
 import { useQuery } from "@tanstack/react-query";
 
 import Navbar from "../../components/Navbar";
-
 import ProductCard from "../../components/ProductCard";
 import FilterPanel from "../../components/FilterPanel";
+import Pagination from "../../components/Pagination";
 
 import { getProducts } from "../../lib/api";
 
 export default function ProductsPage() {
 
     const [search, setSearch] = useState("");
+
     const [category, setCategory] = useState("");
 
     const [minPrice, setMinPrice] = useState("");
@@ -24,67 +24,82 @@ export default function ProductsPage() {
 
     const [sortBy, setSortBy] = useState("");
 
-    const {
+    const [page, setPage] = useState(1);
 
-        data,
+    let sortField = "";
+    let sortOrder = "";
 
-        isLoading,
+    if (sortBy === "price-asc") {
+        sortField = "price";
+        sortOrder = "asc";
+    }
 
-        isError,
+    if (sortBy === "price-desc") {
+        sortField = "price";
+        sortOrder = "desc";
+    }
 
-    } = useQuery({
+    if (sortBy === "name-asc") {
+        sortField = "name";
+        sortOrder = "asc";
+    }
 
-        queryKey: ["products"],
+    if (sortBy === "name-desc") {
+        sortField = "name";
+        sortOrder = "desc";
+    }
 
-        queryFn: () => getProducts(),
+    const { data, isLoading, isError } = useQuery({
+
+        queryKey: [
+            "products",
+            search,
+            category,
+            minPrice,
+            maxPrice,
+            sortBy,
+            page
+        ],
+
+        queryFn: () =>
+            getProducts({
+                q: search,
+                category: category,
+                minPrice: minPrice ? Number(minPrice) : undefined,
+                maxPrice: maxPrice ? Number(maxPrice) : undefined,
+                sortBy: sortField,
+                sortOrder: sortOrder,
+                page: page,
+            }),
 
     });
 
     if (isLoading) {
-
         return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
-
     }
 
     if (isError) {
-
         return <h2 style={{ textAlign: "center" }}>Something went wrong.</h2>;
-
     }
 
-    // const filteredProducts = products.filter((product) =>
-
-    //     product.name.toLowerCase().includes(search.toLowerCase())
-
-    //     ||
-
-    //     product.description.toLowerCase().includes(search.toLowerCase())
-
-    // );
     const products = data?.products || [];
+    const totalPages = data?.totalPages || 1;
 
     return (
-
         <>
 
             <Navbar
-
                 search={search}
-
                 setSearch={setSearch}
-
             />
 
             <main className="products-page">
+
+                <h1>Discover Amazing Products</h1>
+
                 <div className="content">
 
-                    <h1>
-
-                        Discover Amazing Products
-
-                    </h1>
                     <FilterPanel
-
                         category={category}
                         setCategory={setCategory}
 
@@ -96,33 +111,34 @@ export default function ProductsPage() {
 
                         sortBy={sortBy}
                         setSortBy={setSortBy}
-
                     />
 
                     <div className="products-grid">
 
                         {
-
                             products.map((product) => (
 
                                 <ProductCard
-
                                     key={product.id}
-
                                     product={product}
-
                                 />
 
                             ))
-
                         }
 
                     </div>
+
+                    <Pagination
+                        currentPage={page}
+                        totalPages={totalPages}
+                        setPage={setPage}
+                    />
+
                 </div>
-            </main >
+
+            </main>
 
         </>
-
     );
 
 }

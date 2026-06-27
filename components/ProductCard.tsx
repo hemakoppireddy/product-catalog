@@ -3,58 +3,56 @@ import Link from "next/link";
 import { Product } from "../lib/types";
 
 interface ProductCardProps {
-
-    product: Product;
-
+  product: Product;
 }
 
-export default function ProductCard({
+export default function ProductCard({ product }: ProductCardProps) {
 
-    product,
+  return (
 
-}: ProductCardProps) {
+    <div className="product-card">
 
-    return (
+      <div className="image-box">
 
-        <div className="product-card">
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+        />
 
-            <img
-                src={product.imageUrl}
-                alt={product.name}
-            />
+      </div>
 
-            <div className="product-content">
+      <div className="product-content">
 
-                <span className="category">
+        <span className="category">
 
-                    {product.category}
+          {product.category.toUpperCase()}
 
-                </span>
+        </span>
 
-                <h2>{product.name}</h2>
+        <h2>{product.name}</h2>
 
-                <p>{product.description}</p>
+        <p>{product.description}</p>
 
-                <h3>
+        <div className="price-row">
 
-                    ₹{product.price}
-
-                </h3>
-
-                <Link href={`/products/${product.id}`}>
-
-                    <button>
-
-                        View Details
-
-                    </button>
-
-                </Link>
-
-            </div>
+          <h3>₹ {product.price}</h3>
 
         </div>
 
-    );
+        <Link href={`/products/${product.id}`}>
+
+          <button className="details-btn">
+
+            View Details →
+
+          </button>
+
+        </Link>
+
+      </div>
+
+    </div>
+
+  );
 
 }
