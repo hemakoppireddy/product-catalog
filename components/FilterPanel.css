@@ -1,0 +1,75 @@
+.filter-panel{
+
+    width:260px;
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    height:fit-content;
+
+}
+
+.filter-panel h2{
+
+    margin-bottom:25px;
+
+    color:#1e293b;
+
+}
+
+.filter-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:20px;
+
+}
+
+.filter-group label{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.filter-group input,
+.filter-group select{
+
+    padding:10px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.filter-group input:focus,
+.filter-group select:focus{
+
+    border-color:#2563eb;
+
+}
+
+@media(max-width:900px){
+
+.filter-panel{
+
+width:100%;
+
+}
+
+}

@@ -6,9 +6,9 @@ background:#f5f7fb;
 
 .products-page{
 
-width:92%;
+width:95%;
 
-max-width:1400px;
+max-width:1450px;
 
 margin:40px auto;
 
@@ -16,22 +16,44 @@ margin:40px auto;
 
 .products-page h1{
 
-font-size:40px;
-
 text-align:center;
 
-margin-bottom:50px;
+font-size:40px;
+
+margin-bottom:40px;
 
 color:#1e293b;
 
 }
 
+.content{
+
+display:flex;
+
+gap:30px;
+
+align-items:flex-start;
+
+}
+
 .products-grid{
+
+flex:1;
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 
 gap:30px;
+
+}
+
+@media(max-width:900px){
+
+.content{
+
+flex-direction:column;
+
+}
 
 }

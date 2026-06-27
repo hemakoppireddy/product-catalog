@@ -9,12 +9,20 @@ import { useQuery } from "@tanstack/react-query";
 import Navbar from "../../components/Navbar";
 
 import ProductCard from "../../components/ProductCard";
+import FilterPanel from "../../components/FilterPanel";
 
 import { getProducts } from "../../lib/api";
 
 export default function ProductsPage() {
 
     const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
+
+    const [minPrice, setMinPrice] = useState("");
+
+    const [maxPrice, setMaxPrice] = useState("");
+
+    const [sortBy, setSortBy] = useState("");
 
     const {
 
@@ -68,34 +76,50 @@ export default function ProductsPage() {
             />
 
             <main className="products-page">
+                <div className="content">
 
-                <h1>
+                    <h1>
 
-                    Discover Amazing Products
+                        Discover Amazing Products
 
-                </h1>
+                    </h1>
+                    <FilterPanel
 
-                <div className="products-grid">
+                        category={category}
+                        setCategory={setCategory}
 
-                    {
+                        minPrice={minPrice}
+                        setMinPrice={setMinPrice}
 
-                        products.map((product) => (
+                        maxPrice={maxPrice}
+                        setMaxPrice={setMaxPrice}
 
-                            <ProductCard
+                        sortBy={sortBy}
+                        setSortBy={setSortBy}
 
-                                key={product.id}
+                    />
 
-                                product={product}
+                    <div className="products-grid">
 
-                            />
+                        {
 
-                        ))
+                            products.map((product) => (
 
-                    }
+                                <ProductCard
 
+                                    key={product.id}
+
+                                    product={product}
+
+                                />
+
+                            ))
+
+                        }
+
+                    </div>
                 </div>
-
-            </main>
+            </main >
 
         </>
 
