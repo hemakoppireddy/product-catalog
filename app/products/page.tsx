@@ -1,88 +1,102 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import "./products.css";
+
+import { useState } from "react";
+
+import { useQuery } from "@tanstack/react-query";
+
+import Navbar from "../../components/Navbar";
 
 import ProductCard from "../../components/ProductCard";
 
-import { Product } from "../../lib/types";
-
 import { getProducts } from "../../lib/api";
-
-import "./products.css";
 
 export default function ProductsPage() {
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [search, setSearch] = useState("");
 
-    const [loading, setLoading] = useState(true);
+    const {
 
-    useEffect(() => {
+        data: products = [],
 
-        async function fetchProducts() {
+        isLoading,
 
-            try {
+        isError,
 
-                const data = await getProducts();
+    } = useQuery({
 
-                setProducts(data);
+        queryKey: ["products"],
 
-            }
+        queryFn: getProducts,
 
-            catch (error) {
+    });
 
-                console.log(error);
+    if (isLoading) {
 
-            }
-
-            finally {
-
-                setLoading(false);
-
-            }
-
-        }
-
-        fetchProducts();
-
-    }, []);
-
-    if (loading) {
-
-        return <h1>Loading...</h1>;
+        return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
 
     }
 
+    if (isError) {
+
+        return <h2 style={{ textAlign: "center" }}>Something went wrong.</h2>;
+
+    }
+
+    const filteredProducts = products.filter((product) =>
+
+        product.name.toLowerCase().includes(search.toLowerCase())
+
+        ||
+
+        product.description.toLowerCase().includes(search.toLowerCase())
+
+    );
+
     return (
 
-        <main className="products-page">
+        <>
 
-            <h1>
+            <Navbar
 
-                Product Catalog
+                search={search}
 
-            </h1>
+                setSearch={setSearch}
 
-            <div className="products-grid">
+            />
 
-                {
+            <main className="products-page">
 
-                    products.map((product) => (
+                <h1>
 
-                        <ProductCard
+                    Discover Amazing Products
 
-                            key={product.id}
+                </h1>
 
-                            product={product}
+                <div className="products-grid">
 
-                        />
+                    {
 
-                    ))
+                        filteredProducts.map((product) => (
 
-                }
+                            <ProductCard
 
-            </div>
+                                key={product.id}
 
-        </main>
+                                product={product}
+
+                            />
+
+                        ))
+
+                    }
+
+                </div>
+
+            </main>
+
+        </>
 
     );
 
