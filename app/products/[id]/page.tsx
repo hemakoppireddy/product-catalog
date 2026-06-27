@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "./product-details.css";
 
 interface Product {
 
@@ -75,71 +76,46 @@ export default async function ProductDetailsPage({
 
     return (
 
-        <main
-            style={{
-                width: "90%",
-                maxWidth: "1100px",
-                margin: "50px auto",
-                display: "flex",
-                gap: "40px",
-                alignItems: "center",
-                flexWrap: "wrap",
-            }}
-        >
+        <main className="details-container">
 
-            <img
+            <img className="details-image"
 
                 src={product.imageUrl}
 
                 alt={product.name}
 
-                style={{
-                    width: "450px",
-                    borderRadius: "20px",
-                }}
+                
 
             />
 
             <div>
 
-                <span
-                    style={{
-                        background: "#DBEAFE",
-                        padding: "8px 15px",
-                        borderRadius: "30px",
-                    }}
+                <span className="details-category"
+                    
                 >
 
                     {product.category}
 
                 </span>
 
-                <h1
-                    style={{
-                        marginTop: "20px",
-                    }}
+                <h1 className="details-title"
+                    
                 >
 
                     {product.name}
 
                 </h1>
 
-                <h2
-                    style={{
-                        color: "#16A34A",
-                    }}
+                <h2 className="details-price"
+                   
                 >
 
                     ₹ {product.price}
 
                 </h2>
 
-                <p
-                    style={{
-                        marginTop: "20px",
-                        lineHeight: "1.8",
-                        color: "#475569",
-                    }}
+                <p className="details-description"
+                    
                 >
 
                     {product.description}
@@ -148,16 +124,7 @@ export default async function ProductDetailsPage({
 
                 <Link href="/products">
 
-                    <button
-                        style={{
-                            marginTop: "30px",
-                            padding: "12px 20px",
-                            border: "none",
-                            background: "#2563EB",
-                            color: "white",
-                            borderRadius: "8px",
-                            cursor: "pointer",
-                        }}
+                    <button className="back-btn"
                     >
 
                         ← Back to Products

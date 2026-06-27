@@ -15,6 +15,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="image-box">
 
         <img
+          loading="lazy"
           src={product.imageUrl}
           alt={product.name}
         />
@@ -41,7 +42,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <Link href={`/products/${product.id}`}>
 
-          <button className="details-btn">
+          <button className="details-btn"
+          aria-label={`View details of ${product.name}`}>
 
             View Details →
 
