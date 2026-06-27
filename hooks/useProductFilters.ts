@@ -1,4 +1,37 @@
-// Custom hook for managing product filters
-// Implementation will be added later.
+"use client";
 
-export {};
+import { useRouter, useSearchParams } from "next/navigation";
+
+export default function useProductFilters() {
+
+    const router = useRouter();
+
+    const searchParams = useSearchParams();
+
+    function updateFilter(key: string, value: string) {
+
+        const params = new URLSearchParams(searchParams.toString());
+
+        if (value) {
+
+            params.set(key, value);
+
+        } else {
+
+            params.delete(key);
+
+        }
+
+        router.push(`/products?${params.toString()}`);
+
+    }
+
+    return {
+
+        updateFilter,
+
+        searchParams,
+
+    };
+
+}
