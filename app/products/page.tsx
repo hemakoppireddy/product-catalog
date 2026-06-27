@@ -9,6 +9,7 @@ import Navbar from "../../components/Navbar";
 import ProductCard from "../../components/ProductCard";
 import FilterPanel from "../../components/FilterPanel";
 import Pagination from "../../components/Pagination";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 // import useProductFilters from "../../hooks/useProductFilters";
 
@@ -157,13 +158,31 @@ export default function ProductsPage() {
 
     if (isLoading) {
 
-        return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+        return <LoadingSpinner />;
 
     }
 
     if (isError) {
 
-        return <h2 style={{ textAlign: "center" }}>Something went wrong.</h2>;
+        return (
+
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "60vh",
+                    flexDirection: "column"
+                }}
+            >
+
+                <h1>Something went wrong</h1>
+
+                <p>Please refresh the page.</p>
+
+            </div>
+
+        );
 
     }
 
@@ -227,7 +246,20 @@ export default function ProductsPage() {
 
                                     :
 
-                                    <h2>No Products Found</h2>
+                                    <div
+                                        style={{
+                                            width: "100%",
+                                            gridColumn: "1/-1",
+                                            textAlign: "center",
+                                            padding: "80px"
+                                        }}
+                                    >
+
+                                        <h2>No Products Found</h2>
+
+                                        <p>Try changing your search or filters.</p>
+
+                                    </div>
 
                             }
 
