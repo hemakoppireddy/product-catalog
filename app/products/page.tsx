@@ -113,26 +113,26 @@ export default function ProductsPage() {
                         setSortBy={setSortBy}
                     />
 
-                    <div className="products-grid">
+                    <div className="products-section">
 
-                        {
-                            products.map((product) => (
+                        <div className="products-grid">
 
+                            {products.map((product) => (
                                 <ProductCard
                                     key={product.id}
                                     product={product}
                                 />
+                            ))}
 
-                            ))
-                        }
+                        </div>
+
+                        <Pagination
+                            currentPage={page}
+                            totalPages={totalPages}
+                            setPage={setPage}
+                        />
 
                     </div>
-
-                    <Pagination
-                        currentPage={page}
-                        totalPages={totalPages}
-                        setPage={setPage}
-                    />
 
                 </div>
 
