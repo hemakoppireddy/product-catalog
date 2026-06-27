@@ -1,15 +1,51 @@
-import { Product } from "./types";
+import { ProductsResponse } from "./types";
 
-export async function getProducts(): Promise<Product[]> {
+interface QueryParams {
 
-    const response = await fetch("/api/products");
+  q?: string;
 
-    if (!response.ok) {
+  category?: string;
 
-        throw new Error("Failed to fetch products");
+  minPrice?: number;
+
+  maxPrice?: number;
+
+  sortBy?: string;
+
+  sortOrder?: string;
+
+  page?: number;
+
+}
+
+export async function getProducts(params: QueryParams = {}) {
+
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+
+    if (value !== undefined && value !== "") {
+
+      searchParams.append(key, String(value));
 
     }
 
-    return response.json();
+  });
+
+  const response = await fetch(
+
+    `/api/products?${searchParams.toString()}`
+
+  );
+
+  if (!response.ok) {
+
+    throw new Error("Failed to fetch products");
+
+  }
+
+  const data: ProductsResponse = await response.json();
+
+  return data;
 
 }

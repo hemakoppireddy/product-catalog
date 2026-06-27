@@ -18,7 +18,7 @@ export default function ProductsPage() {
 
     const {
 
-        data: products = [],
+        data,
 
         isLoading,
 
@@ -28,7 +28,7 @@ export default function ProductsPage() {
 
         queryKey: ["products"],
 
-        queryFn: getProducts,
+        queryFn: () => getProducts(),
 
     });
 
@@ -44,15 +44,16 @@ export default function ProductsPage() {
 
     }
 
-    const filteredProducts = products.filter((product) =>
+    // const filteredProducts = products.filter((product) =>
 
-        product.name.toLowerCase().includes(search.toLowerCase())
+    //     product.name.toLowerCase().includes(search.toLowerCase())
 
-        ||
+    //     ||
 
-        product.description.toLowerCase().includes(search.toLowerCase())
+    //     product.description.toLowerCase().includes(search.toLowerCase())
 
-    );
+    // );
+    const products = data?.products || [];
 
     return (
 
@@ -78,7 +79,7 @@ export default function ProductsPage() {
 
                     {
 
-                        filteredProducts.map((product) => (
+                        products.map((product) => (
 
                             <ProductCard
 

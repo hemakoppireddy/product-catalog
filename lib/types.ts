@@ -22,8 +22,13 @@ export interface ProductQueryParams {
 
 // API Response
 export interface ProductsResponse {
-  products: Product[];
-  totalProducts: number;
-  currentPage: number;
-  totalPages: number;
+
+    products: Product[];
+
+    totalProducts: number;
+
+    currentPage: number;
+
+    totalPages: number;
+
 }
