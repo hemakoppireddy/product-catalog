@@ -1,7 +1,25 @@
-export default function ProductCard() {
-  return (
-    <div>
-      <h3>Product Card</h3>
-    </div>
-  );
+import { Product } from "../lib/types";
+
+interface ProductCardProps{
+
+    product:Product;
+
+}
+
+export default function ProductCard({
+
+    product,
+
+}:ProductCardProps){
+
+    return(
+
+        <div>
+
+            Product Card
+
+        </div>
+
+    );
+
 }
