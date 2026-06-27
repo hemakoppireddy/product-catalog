@@ -1,5 +1,6 @@
+import { NextResponse } from "next/server";
+import { products } from "@/lib/mock-products";
+
 export async function GET() {
-  return Response.json({
-    message: "Single Product API",
-  });
+  return NextResponse.json(products);
 }
